@@ -1,21 +1,10 @@
-import requests
-from bs4 import BeautifulSoup
-import sys
+import json
+a = {'id': 12345, 
+'token':56789}
+s = json.dumps(a)
 
-results = []
-r = requests.get("http://ketqua1.net")
-tree = BeautifulSoup(markup=r.text, features="html.parser")
-nodes = tree.find_all(name="td", attrs={"class": "chu17"})
-
-for node in nodes:
-    results.append(node.text)
-if len(sys.argv) == 1:
-    for result in results:
-        print(result)
-else:
-    for number in sys.argv[1:]:
-
-        if number in results:
-            print("{} trung lo".format(number))
-        else:
-            print("{} KHONG trung lo".format(number))
+with open('test.json', 'wt') as f:
+    f.write(s)
+with open('test.json', 'rt') as f:
+    ys = json.load(f)
+print(ys, type(ys))
